@@ -6,6 +6,9 @@ const port = process.env.PORT
 const hostname = process.env.HOST_NAME
 const connection = require('./config/database')
 
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+
 const configViewEngine = require('./config/viewEngine')
 configViewEngine(app)
 
@@ -14,12 +17,6 @@ app.use('/', webRoutes)
 
 
 
-connection.query(
-  'select * from users',
-  function(err, results, fields) {
-    console.log(results);
-  }
-)
 
 
 
