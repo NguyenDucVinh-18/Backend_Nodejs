@@ -1,9 +1,14 @@
 const connection = require("../config/database");
-const {getAllUsers,getUserById,updateUser} = require("../services/CRUDService");
+const {
+  getAllUsers,
+  getUserById,
+  updateUser,
+  deleteUser,
+} = require("../services/CRUDService");
 
 const getHomePage = async (req, res) => {
   let result = await getAllUsers();
-  return res.render("home.ejs",{listUsers:result});
+  return res.render("home.ejs", { listUsers: result });
 };
 
 const getEjsPage = (req, res) => {
@@ -26,23 +31,21 @@ const postCreateUser = async (req, res) => {
   // );
 
   let [results, fields] = await connection.query(
-    `insert into users(email,name,city) values(? , ? , ?)`, [email, name, city],
-  ) 
+    `insert into users(email,name,city) values(? , ? , ?)`,
+    [email, name, city]
+  );
   res.send("User created successfully");
-
-
-
 };
 
 const getCreateUserPage = (req, res) => {
   res.render("createUser.ejs");
-}
+};
 
 const getUpdateUserPage = async (req, res) => {
   let results = await getUserById(req.params.idUser);
   let user = results[0];
-  res.render("updateUser.ejs",{userEdit:user});
-}
+  res.render("updateUser.ejs", { userEdit: user });
+};
 
 const postUpdateUser = async (req, res) => {
   let name = req.body.name;
@@ -52,21 +55,21 @@ const postUpdateUser = async (req, res) => {
 
   console.log(name, email, city, id);
 
-  await updateUser(name,email,city,id);
+  await updateUser(name, email, city, id);
   res.redirect("/");
-
-  // let [results, fields] = await connection.query(
-  //   `insert into users(email,name,city) values(? , ? , ?)`, [email, name, city],
-  // ) 
-  // res.send("User created successfully");
-
-
-
 };
 
+const getDeletePage = async (req, res) => {
+  let results = await getUserById(req.params.idUser);
+  let user = results[0];
+  res.render("deleteUser.ejs", { userDelete: user });
+};
 
-
-
+const postDeleteUser = async (req, res) => {
+  let id = req.body.idUser;
+  await deleteUser(id);
+  res.redirect("/");
+};
 
 module.exports = {
   getHomePage,
@@ -74,5 +77,7 @@ module.exports = {
   postCreateUser,
   getCreateUserPage,
   getUpdateUserPage,
-  postUpdateUser
+  postUpdateUser,
+  postDeleteUser,
+  getDeletePage,
 };
