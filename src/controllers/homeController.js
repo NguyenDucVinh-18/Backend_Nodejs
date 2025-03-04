@@ -6,8 +6,10 @@ const {
   deleteUser,
 } = require("../services/CRUDService");
 
+const User = require("../models/user");
+
 const getHomePage = async (req, res) => {
-  let result = await getAllUsers();
+  let result = [];
   return res.render("home.ejs", { listUsers: result });
 };
 
@@ -30,10 +32,13 @@ const postCreateUser = async (req, res) => {
   //   }
   // );
 
-  let [results, fields] = await connection.query(
-    `insert into users(email,name,city) values(? , ? , ?)`,
-    [email, name, city]
-  );
+  // let [results, fields] = await connection.query(
+  //   `insert into users(email,name,city) values(? , ? , ?)`,
+  //   [email, name, city]
+  // );
+
+  await User.create({ name, email, city });
+
   res.send("User created successfully");
 };
 
