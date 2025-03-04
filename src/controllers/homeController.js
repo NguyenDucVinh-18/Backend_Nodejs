@@ -9,7 +9,7 @@ const {
 const User = require("../models/user");
 
 const getHomePage = async (req, res) => {
-  let result = [];
+  let result = await User.find({});
   return res.render("home.ejs", { listUsers: result });
 };
 
@@ -47,8 +47,9 @@ const getCreateUserPage = (req, res) => {
 };
 
 const getUpdateUserPage = async (req, res) => {
-  let results = await getUserById(req.params.idUser);
-  let user = results[0];
+  // let results = await getUserById(req.params.idUser);
+  // let user = results[0];
+  let user = await User.findById(req.params.idUser).exec();
   res.render("updateUser.ejs", { userEdit: user });
 };
 
@@ -60,19 +61,22 @@ const postUpdateUser = async (req, res) => {
 
   console.log(name, email, city, id);
 
-  await updateUser(name, email, city, id);
+  // await updateUser(name, email, city, id);
+  await User.updateOne({ _id: id }, { name: name, email: email, city: city });
   res.redirect("/");
 };
 
 const getDeletePage = async (req, res) => {
-  let results = await getUserById(req.params.idUser);
-  let user = results[0];
+  // let results = await getUserById(req.params.idUser);
+  // let user = results[0];
+  let user = await User.findById(req.params.idUser).exec();
   res.render("deleteUser.ejs", { userDelete: user });
 };
 
 const postDeleteUser = async (req, res) => {
   let id = req.body.idUser;
-  await deleteUser(id);
+  // await deleteUser(id);
+  await User.deleteOne({ _id: id });
   res.redirect("/");
 };
 
