@@ -16,7 +16,9 @@ const configViewEngine = require('./config/viewEngine')
 configViewEngine(app)
 
 const webRoutes = require('./routes/web')
+const apiRouter = require('./routes/api')
 app.use('/', webRoutes)
+app.use('/v1/api/', apiRouter)
 
 
 
