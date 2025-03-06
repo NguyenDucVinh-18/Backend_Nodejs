@@ -1,13 +1,14 @@
 const express = require('express')
 const mongoose = require("mongoose");
 const path = require('path')
+const fileUpload = require('express-fileupload')
 require('dotenv').config()
 const app = express()
 const port = process.env.PORT
 const hostname = process.env.HOST_NAME
 const connection = require('./config/database')
 
-
+app.use(fileUpload())
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
