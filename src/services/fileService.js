@@ -13,7 +13,7 @@ const upLoadSingleFile = async (fileObject) => {
         await fileObject.mv(finalName);
         return{
             status: 'success',
-            path:finalName,
+            path:fileName,
             error: null
         }
     } catch (error) {
