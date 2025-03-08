@@ -1,6 +1,6 @@
 const Customer = require("../models/customer");
 const { upLoadSingleFile } = require("../services/fileService");
-const {createCustomerService} = require("../services/customerService");
+const {createCustomerService,createArrayCustomerService,getAllCustomersService} = require("../services/customerService");
 
 module.exports = {
   postCreateCustomerAPI: async (req, res) => {
@@ -26,4 +26,26 @@ module.exports = {
         data: result
     })
   },
+  postCreateArrayCustomerAPI: async (req, res) => {
+    let customers = req.body.customers;
+    let result = await createArrayCustomerService(customers);
+    if(result){
+        return res.status(200).json({
+            errorCode: 0,
+            data: result
+        })
+    } else {
+        return res.status(500).json({
+            errorCode: -1,
+            data: null
+        })
+    }
+  },
+  getAllCustomersAPI: async (req, res) => {
+    let result = await getAllCustomersService();
+    return res.status(200).json({
+        errorCode: 0,
+        data: result
+    })
+  }
 };

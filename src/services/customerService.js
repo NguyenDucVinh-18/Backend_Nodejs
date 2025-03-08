@@ -17,4 +17,22 @@ module.exports = {
       return null;
     }
   },
+  createArrayCustomerService : async (customers) => {
+    try {
+      let result = Customer.insertMany(customers);
+      return result;
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+  },
+  getAllCustomersService: async () => {
+    try {
+      let result = Customer.find({});
+      return result;
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+  },
 };
