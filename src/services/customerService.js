@@ -17,7 +17,7 @@ module.exports = {
       return null;
     }
   },
-  createArrayCustomerService : async (customers) => {
+  createArrayCustomerService: async (customers) => {
     try {
       let result = Customer.insertMany(customers);
       return result;
@@ -35,4 +35,31 @@ module.exports = {
       return null;
     }
   },
+  updateCustomerService: async (idCustomer,customerData) => {
+    try {
+      let result = Customer.updateOne(
+        { _id: idCustomer },
+        {
+          name: customerData.name,
+          address: customerData.address,
+          phone: customerData.phone,
+          email: customerData.email,
+          description: customerData.description,
+        }
+      );
+      return result;
+    } catch (error) {
+      console.log(error);
+      return;
+    }
+  },
+  deleteACustomerService: async (idCustomer) => {
+    try {
+      let result = Customer.deleteById({ _id: idCustomer });
+      return result;
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+  }
 };
