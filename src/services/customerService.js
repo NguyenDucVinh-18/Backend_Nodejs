@@ -35,7 +35,7 @@ module.exports = {
       return null;
     }
   },
-  updateCustomerService: async (idCustomer,customerData) => {
+  updateCustomerService: async (idCustomer, customerData) => {
     try {
       let result = Customer.updateOne(
         { _id: idCustomer },
@@ -61,5 +61,13 @@ module.exports = {
       console.log(error);
       return null;
     }
-  }
+  },
+  deleteArrayCustomerService: async (ids) => {
+    try {
+      let result = Customer.delete({ _id: { $in: ids } });
+      return result;
+    } catch (error) {
+      console.log(error);
+    }
+  },
 };

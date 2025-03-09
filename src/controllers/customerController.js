@@ -6,6 +6,7 @@ const {
   getAllCustomersService,
   updateCustomerService,
   deleteACustomerService,
+  deleteArrayCustomerService
 } = require("../services/customerService");
 
 module.exports = {
@@ -95,4 +96,20 @@ module.exports = {
       });
     }
   },
+  deleteArrayCustomerAPI: async (req, res) => {
+    let ids = req.body.ids;
+    console.log(ids);
+    let result = deleteArrayCustomerService(ids);
+    if (result) {
+      return res.status(200).json({
+        errorCode: 0,
+        data: result,
+      });
+    } else {
+      return res.status(500).json({
+        errorCode: -1,
+        data: null,
+      });
+    }
+  }
 };
