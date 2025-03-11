@@ -22,7 +22,23 @@ module.exports = {
       }
       let result = await myProject.save();
       return result;
-    }
+    } else if (data.type === "ADD_TASKS") {
+      let myProject = await Project.findById(data.projectId).exec();
+      // console.log(myProject);
+      for (let i = 0; i < data.tasksArr.length; i++) {
+        myProject.tasks.push(data.tasksArr[i]);
+      }
+      let result = await myProject.save();
+      return result;
+    } else if (data.type === "REMOVE_TASKS") {
+      let myProject = await Project.findById(data.projectId).exec();
+      // console.log(myProject);
+      for (let i = 0; i < data.tasksArr.length; i++) {
+        myProject.tasks.pull(data.tasksArr[i]);
+      }
+      let result = await myProject.save();
+      return result;
+    } 
   },
   getAllProjectService: async (query) => {
     const page = query.page;

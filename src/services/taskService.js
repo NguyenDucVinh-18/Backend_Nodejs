@@ -13,27 +13,15 @@ module.exports = {
     const { filter, limit } = aqp(query);
     delete filter.page;
     let offset = (page - 1) * limit;
-    let result = await Task.find(filter)
-      .skip(offset)
-      .limit(limit)
-      .exec();
+    let result = await Task.find(filter).skip(offset).limit(limit).exec();
     return result;
   },
   updateTaskService: async (data) => {
-    let result = await Task.updateOne(
-        { _id: data.taskId },
-        {
-          name: data.name,
-          startDate: data.startDate,
-          endDate: data.endDate,
-          description: data.description,
-          status:data.status
-        }
-      );
-      return result;
+    let result = await Task.updateOne({ _id: data.taskId }, { ...data });
+    return result;
   },
   deleteTaskService: async (taskId) => {
     let result = Task.deleteById({ _id: taskId });
     return result;
-  }
+  },
 };
