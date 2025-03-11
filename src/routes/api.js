@@ -17,6 +17,8 @@ const {
   deleteArrayCustomerAPI
 } = require("../controllers/customerController");
 
+const{postCreateProjectAPI} = require("../controllers/projectController");
+
 routerAPI.get("/users", getUsersAPI);
 routerAPI.post("/users", postCreateUserAPI);
 routerAPI.put("/users", putUpdateUserAPI);
@@ -30,5 +32,7 @@ routerAPI.get("/customers", getAllCustomersAPI);
 routerAPI.put("/customers", putUpdateCustomerAPI);
 routerAPI.delete("/customers", deleteACustomerAPI);
 routerAPI.delete("/customers-many", deleteArrayCustomerAPI);
+
+routerAPI.post("/projects", postCreateProjectAPI);
 
 module.exports = routerAPI;
