@@ -21,6 +21,7 @@ const taskSchema = new mongoose.Schema(
       required: true,
     },
     description: String,
+    status:String,
     startDate: String,
     endDate: String,
     usersInfor: userSchema,

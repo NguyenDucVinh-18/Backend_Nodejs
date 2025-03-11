@@ -36,9 +36,16 @@ module.exports = {
   deleteProjectAPI : async (req,res) => {
     let projectId = req.body.projectId;
     let result = await deleteProjectService(projectId);
-    return res.status(200).json({
-      errorCode: 0,
-      data: result,
-    });
+    try {
+      return res.status(200).json({
+        errorCode: 0,
+        data: result,
+      });
+    } catch (error) {
+      return res.status(500).json({
+        errorCode: -1,
+        data: error,
+      });
+    }
   }
 };

@@ -15,10 +15,22 @@ const {
   putUpdateCustomerAPI,
   deleteACustomerAPI,
   deleteArrayCustomerAPI,
-  
 } = require("../controllers/customerController");
 
-const{postCreateProjectAPI,getAllProjectAPI,putUpdateProjectAPI,deleteProjectAPI} = require("../controllers/projectController");
+const {
+  postCreateProjectAPI,
+  getAllProjectAPI,
+  putUpdateProjectAPI,
+  deleteProjectAPI,
+} = require("../controllers/projectController");
+
+const {
+  postCreateATasksAPI,
+  getAllTasksAPI,
+  putUpdateTaskAPI,
+  deleteTAskAPI
+
+} = require("../controllers/taskController");
 
 routerAPI.get("/users", getUsersAPI);
 routerAPI.post("/users", postCreateUserAPI);
@@ -38,5 +50,11 @@ routerAPI.post("/projects", postCreateProjectAPI);
 routerAPI.get("/projects", getAllProjectAPI);
 routerAPI.put("/projects", putUpdateProjectAPI);
 routerAPI.delete("/projects", deleteProjectAPI);
+
+routerAPI.post("/tasks", postCreateATasksAPI);
+routerAPI.get("/tasks", getAllTasksAPI);
+routerAPI.put("/tasks", putUpdateTaskAPI);
+routerAPI.delete("/tasks", deleteTAskAPI);
+
 
 module.exports = routerAPI;

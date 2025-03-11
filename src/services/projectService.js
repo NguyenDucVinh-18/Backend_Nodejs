@@ -14,7 +14,7 @@ module.exports = {
       }
       let result = await myProject.save();
       return result;
-    } else if(data.type === "REMOVE_USERS"){
+    } else if (data.type === "REMOVE_USERS") {
       let myProject = await Project.findById(data.projectId).exec();
       // console.log(project);
       for (let i = 0; i < data.usersArr.length; i++) {
@@ -28,7 +28,7 @@ module.exports = {
     const page = query.page;
     const population = query.population;
     const { filter, limit } = aqp(query);
-    delete filter.page; 
+    delete filter.page;
     let offset = (page - 1) * limit;
     console.log(filter);
     console.log(limit);
@@ -53,8 +53,7 @@ module.exports = {
     return result;
   },
   deleteProjectService: async (projectId) => {
-    let result = await Project.deleteById({ _id: projectId }); 
+    let result = Project.deleteById({ _id: projectId });
     return result;
-  }
-
+  },
 };

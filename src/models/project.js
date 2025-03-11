@@ -30,7 +30,8 @@ const projectSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
-projectSchema.plugin(mongoose_delete, { overrideMethods: "all" });
+projectSchema.plugin(mongoose_delete, { overrideMethods: "all", deletedAt: true, deletedBy: true });
+
 const Project = mongoose.model("project", projectSchema);
 
 module.exports = Project;
