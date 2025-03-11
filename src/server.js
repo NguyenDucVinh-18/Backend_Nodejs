@@ -5,7 +5,7 @@ const path = require("path");
 const fileUpload = require("express-fileupload");
 require("dotenv").config();
 const app = express();
-const port = process.env.PORT;
+const port = process.env.PORT ;
 const hostname = process.env.HOST_NAME;
 const connection = require("./config/database");
 
